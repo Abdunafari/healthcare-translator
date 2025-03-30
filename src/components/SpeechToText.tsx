@@ -85,7 +85,7 @@ export default function SpeechToText() {
 
   if (!browserSupportsSpeechRecognition) {
     return (
-      <div className="p-4 text-red-500">
+      <div className="p-4 text-redr-500">
         Your browser does not support speech recognition. Try Chrome or Edge.
       </div>
     );
