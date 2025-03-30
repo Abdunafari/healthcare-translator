@@ -20,7 +20,7 @@ export default function SpeechToText() {
           messages: [
             {
               role: 'user',
-              content: `Translate this medical text to Spanish: "${text}". Return ONLY the translation.`,
+              content: `As a medical translator, convert this to Spanish: '${text}'. Prioritize clinical accuracy. Return ONLY the translation.`,
             },
           ],
           max_tokens: 1000,
