@@ -41,6 +41,18 @@ export default function SpeechToText() {
     }
   };
 
+  const speakTranslation = () => {
+    if (!translatedText) return;
+    
+    // Stop any ongoing speech
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(translatedText);
+    utterance.lang = 'es-ES'; // Spanish
+    utterance.rate = 0.9; // Slightly slower for medical terms
+    window.speechSynthesis.speak(utterance);
+  };
+
   const startListening = () => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -141,7 +153,16 @@ export default function SpeechToText() {
         </div>
         
         <div>
-          <h3 className="font-medium text-gray-700">Translation (Spanish):</h3>
+          <div className="flex justify-between items-center">
+            <h3 className="font-medium text-gray-700">Translation (Spanish):</h3>
+            <button
+              onClick={speakTranslation}
+              disabled={!translatedText || isTranslating}
+              className="px-3 py-1 bg-green-500 text-white rounded-full disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-1 text-sm"
+            >
+              🔊 Play
+            </button>
+          </div>
           <p className="mt-1 p-3 border rounded-lg bg-gray-50 min-h-12">
             {isTranslating ? "Translating..." : translatedText || "Translation will appear here"}
           </p>
